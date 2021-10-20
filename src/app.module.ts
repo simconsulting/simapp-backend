@@ -32,4 +32,4 @@ import { NewsletterModule } from './newsletter/newsletter.module';
   controllers: [AppController],
   providers: [AppService, GoogleStrategy, FacebookStrategy],
 })
-export class AppModule { }
+export class AppModule {}
