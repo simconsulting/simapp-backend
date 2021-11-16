@@ -9,4 +9,6 @@ export interface User extends Document {
     address: string;
     phone: string;
     picture: string;
+    salt: string;
+    role: string;
 }

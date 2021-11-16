@@ -9,7 +9,6 @@ import {
   statusProduct,
 } from './schemas/products.schema';
 import { v4 as uuidv4 } from 'uuid';
-import { Supermarkets } from 'src/supermarkets/schemas/supermarket.schema';
 
 @Injectable()
 export class ProductsService {
@@ -30,7 +29,6 @@ export class ProductsService {
     createdProducts.disponibilite = createProductDto.disponibilite;
     createdProducts.description = createProductDto.description;
     createdProducts.image = createProductDto.image;
-    createdProducts.supermarket_id = Supermarkets.supermarketId;
     createdProducts.quantite = createProductDto.quantite;
     createdProducts.video = createProductDto.video;
     createdProducts.status = statusProduct.PasEnPromotion;
@@ -71,8 +69,6 @@ export class ProductsService {
     if (updateProductDto.dateExpired)
       updateProduct.dateExpired = updateProductDto.dateExpired;
     if (updateProductDto.image) updateProduct.image = updateProductDto.image;
-    if (updateProductDto.supermarket_id)
-      updateProduct.supermarket_id = Supermarkets.supermarketId;
     if (updateProductDto.description)
       updateProduct.description = updateProductDto.description;
     if (updateProductDto.quantite)

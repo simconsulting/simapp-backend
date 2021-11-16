@@ -6,4 +6,5 @@ export interface RegisterDTO {
   address: string;
   phone: string;
   picture: string;
+  salt: string;
 }

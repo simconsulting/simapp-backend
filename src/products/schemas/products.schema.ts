@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 //import
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import * as mongoose from 'mongoose';
-import { Supermarkets } from '../../supermarkets/schemas/supermarket.schema'
+// import * as mongoose from 'mongoose';
+// import { Supermarkets } from '../../supermarkets/schemas/supermarket.schema'
 
 export enum statusProduct {
   PasEnPromotion = 0,
@@ -54,8 +54,8 @@ export class Products {
   @Prop({ required: false })
   video: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Supermarkets' })
-  supermarket_id: Supermarkets[];
+  @Prop({ type: Date, Default: Date.now })
+  createdAt: Date;
 
 }
 

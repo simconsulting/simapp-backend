@@ -28,6 +28,9 @@ export class Clients {
 
   @Prop()
   musique: string;
+
+  @Prop({ type: Date, Default: Date.now })
+  createdAt: Date;
 }
 
 export const ClientsSchema = SchemaFactory.createForClass(Clients);

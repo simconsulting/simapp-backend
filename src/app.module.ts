@@ -13,6 +13,8 @@ import { ConfigModule } from '@nestjs/config';
 import { UserSchema } from './models/user.schema';
 import { SendGridModule } from '@anchan828/nest-sendgrid';
 import { NewsletterModule } from './newsletter/newsletter.module';
+import { AssignModule } from './assign/assign.module';
+import { UtilisateurModule } from './utilisateur/utilisateur.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { NewsletterModule } from './newsletter/newsletter.module';
     UserModule,
     AuthModule,
     NewsletterModule,
+    AssignModule,
+    UtilisateurModule,
   ],
   controllers: [AppController],
   providers: [AppService, GoogleStrategy, FacebookStrategy],

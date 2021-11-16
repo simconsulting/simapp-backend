@@ -8,7 +8,7 @@ export type SupermarketDocument = Supermarkets & Document;
 export class Supermarkets {
   @Prop()
   supermarketId: string;
-  
+
   @Prop({ required: false })
   name: string;
 
@@ -26,6 +26,9 @@ export class Supermarkets {
 
   @Prop({ required: false })
   accreditation: string;
+
+  @Prop({ type: Date, Default: Date.now })
+  createdAt: Date;
 
   timestamps: true;
   static supermarketId: Supermarkets[];

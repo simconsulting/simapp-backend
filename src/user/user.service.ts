@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { LoginDTO } from 'src/auth/dto/login.dto';
 import * as bcrypt from 'bcrypt';
 import { Payload } from 'src/types/payload';
+import { UserRoles } from 'src/Generics/enums/user-roles.enum';
 
 @Injectable()
 export class UserService {
@@ -28,8 +29,12 @@ export class UserService {
     createUser.phone = registerDto.phone;
     createUser.address = registerDto.address;
     createUser.picture = registerDto.picture;
+    createUser.role = UserRoles.USER;
+
+    createUser.salt = await bcrypt.genSalt();
 
     await createUser.save();
+    // console.log(createUser);
 
     return this.sanitizeUser(createUser);
   }
@@ -40,17 +45,25 @@ export class UserService {
     if (!user) {
       throw new HttpException('user doesnt exists', HttpStatus.BAD_REQUEST);
     }
+    // console.log(user);
     if (await bcrypt.compare(password, user.password)) {
       return this.sanitizeUser(user);
     } else {
       throw new HttpException('invalid credential', HttpStatus.BAD_REQUEST);
     }
+    // const hashedPassword = await bcrypt.hash(password, user.salt);
+
+    // if ((await hashedPassword) === user.password) {
+    //   return this.sanitizeUser(user);
+    // } else {
+    //   throw new HttpException('invalid credential', HttpStatus.BAD_REQUEST);
+    // }
   }
 
   //return user Objet without password
   sanitizeUser(user: User) {
     const sanitized = user.toObject();
-    delete sanitized['password'];
+    // delete sanitized['password'];
     return sanitized;
   }
 
@@ -58,5 +71,9 @@ export class UserService {
   async findByPayload(payload: Payload) {
     const { email } = payload;
     return await this.userModel.findOne({ email });
+  }
+
+  async findAll() {
+    return this.userModel.find();
   }
 }

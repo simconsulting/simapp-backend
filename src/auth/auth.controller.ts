@@ -31,6 +31,7 @@ export class AuthController {
 
     const payload = {
       email: user.email,
+      role: user.role,
     };
     const token = await this.authService.signPayload(payload);
 
@@ -43,10 +44,16 @@ export class AuthController {
 
     const payload = {
       email: user.email,
+      role: user.role,
     };
 
     const token = await this.authService.signPayload(payload);
 
     return { user, token };
+  }
+
+  @Get()
+  async findAll() {
+    return await this.userService.findAll();
   }
 }

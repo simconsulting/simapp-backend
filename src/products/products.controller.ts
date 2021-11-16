@@ -9,6 +9,7 @@ import {
   Put,
   UseInterceptors,
   UploadedFiles,
+  UseGuards,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -17,6 +18,7 @@ import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { Helper } from 'src/shared/helper';
+import { JWTAuthGuard } from 'src/auth/Guards/jwt-auth.guard';
 
 @ApiTags('Products Ressource')
 @Controller('products')
@@ -31,6 +33,7 @@ export class ProductsController {
   }
 
   @Get()
+  @UseGuards(JWTAuthGuard)
   findAll() {
     return this.productsService.getAllProducts();
   }
